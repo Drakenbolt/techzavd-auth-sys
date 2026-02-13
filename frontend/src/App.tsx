@@ -15,11 +15,11 @@ function App() {
       <Routes>
         <Route 
           path="/login" 
-          element={isAuthenticated ? <Navigate to="/profile" replace /> : <LoginPage />} 
+          element={isAuthenticated ? <Navigate to="/" replace /> : <LoginPage />} 
         />
         <Route 
           path="/register" 
-          element={isAuthenticated ? <Navigate to="/profile" replace /> : <RegisterPage />} 
+          element={isAuthenticated ? <Navigate to="/" replace /> : <RegisterPage />} 
         />
 
         <Route element={<MainLayout />}>
