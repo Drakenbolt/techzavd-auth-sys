@@ -5,6 +5,8 @@ import { HomePage } from './pages/HomePage';
 import { LoginPage } from './pages/LoginPage';
 import { RegisterPage } from './pages/RegisterPage';
 import { ProfilePage } from './pages/ProfilePage';
+import { ForgotPasswordPage } from './pages/ForgotPasswordPage';
+import { ResetPasswordPage } from './pages/ResetPasswordPage';
 import { useAuth } from './context/AuthContext';
 
 function App() {
@@ -20,6 +22,13 @@ function App() {
         <Route 
           path="/register" 
           element={isAuthenticated ? <Navigate to="/" replace /> : <RegisterPage />} 
+        />
+
+        <Route 
+          path="/forgot-password" element={<ForgotPasswordPage />} 
+        />
+        <Route 
+          path="/reset-password" element={<ResetPasswordPage />} 
         />
 
         <Route element={<MainLayout />}>
