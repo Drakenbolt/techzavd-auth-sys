@@ -16,6 +16,12 @@ export class User {
 
   @Prop({ default: null }) 
   avatarUrl?: string;
+
+  @Prop({ default: null })
+  resetPasswordToken?: string;
+
+  @Prop({ default: null })
+  resetPasswordExpires?: Date;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

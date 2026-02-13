@@ -70,4 +70,29 @@ export class UsersService {
 
     return { message: 'Користувача успішно видалено', id };
   }
+
+  //токени для зміни пароля
+
+  async setResetToken(userId: string, token: string) {
+    const expires = new Date(Date.now() + 3600000); 
+    
+    return this.userModel.findByIdAndUpdate(userId, {
+      resetPasswordToken: token,
+      resetPasswordExpires: expires,
+    });
+  }
+
+  async findByResetToken(token: string): Promise<UserDocument | null> {
+    return this.userModel.findOne({
+      resetPasswordToken: token,
+      resetPasswordExpires: { $gt: Date.now() }, 
+    });
+  }
+
+  async clearResetToken(userId: string) {
+    return this.userModel.findByIdAndUpdate(userId, {
+      resetPasswordToken: null,
+      resetPasswordExpires: null,
+    });
+  }
 }

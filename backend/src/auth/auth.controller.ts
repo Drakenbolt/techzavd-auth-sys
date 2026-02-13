@@ -2,6 +2,9 @@ import { Controller, Post, Body, UnauthorizedException, Get, UseGuards, Request}
 import { AuthService } from './auth.service';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { JwtAuthGuard } from './jwt-auth.guard';
+import { ForgotPasswordDto } from '../users/dto/forgot-password.dto';
+import { ResetPasswordDto } from '../users/dto/reset-password.dto';
+
 
 @Controller('auth')
 export class AuthController {
@@ -27,5 +30,18 @@ export class AuthController {
   @Get('profile')
   getProfile(@Request() req) {
     return req.user;
+  }
+
+  @Post('forgot-password')
+  async forgotPassword(@Body() forgotPasswordDto: ForgotPasswordDto) {
+    return this.authService.forgotPassword(forgotPasswordDto.email);
+  }
+
+  @Post('reset-password')
+  async resetPassword(@Body() resetPasswordDto: ResetPasswordDto) {
+    return this.authService.resetPassword(
+      resetPasswordDto.token, 
+      resetPasswordDto.newPassword
+    );
   }
 }
