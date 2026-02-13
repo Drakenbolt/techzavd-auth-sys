@@ -39,7 +39,10 @@ function App() {
           </Route>
         </Route>
 
-        <Route path="*" element={<div className="text-center mt-20 text-xl">404 - Сторінку не знайдено</div>} />
+        <Route path="*" element={<div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-slate-950 to-slate-900 text-center">
+          <h1 className="text-4xl font-bold text-lime-400 mb-4">404</h1>
+          <p className="text-xl text-slate-300">Сторінку не знайдено</p>
+        </div>} />
       </Routes>
     </Router>
   );

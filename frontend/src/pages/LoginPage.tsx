@@ -48,21 +48,21 @@ export const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
-      <div className="max-w-md w-full bg-white rounded-xl shadow-lg p-8">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 px-4">
+      <div className="max-w-md w-full bg-gradient-to-b from-slate-800 to-slate-900 rounded-xl shadow-2xl shadow-lime-500/20 p-8 border border-lime-500/30">
+        <h2 className="text-3xl font-bold text-center bg-gradient-to-r from-lime-400 to-cyan-400 bg-clip-text text-transparent mb-8">
           Авторизація
         </h2>
 
         {serverError && (
-          <div className="bg-red-50 text-red-600 p-3 rounded-lg mb-4 text-sm text-center border border-red-200">
+          <div className="bg-red-500/20 text-red-300 p-3 rounded-lg mb-4 text-sm text-center border border-red-500/50">
             {serverError}
           </div>
         )}
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+            <label className="block text-sm font-medium text-lime-300 mb-1">Email</label>
             <input
               type="email"
               {...register('email', { 
@@ -72,46 +72,47 @@ export const LoginPage = () => {
                   message: 'Некоректний email'
                 }
               })}
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition
-                ${errors.email ? 'border-red-500 focus:ring-red-200' : 'border-gray-300'}`}
+              className={`w-full px-4 py-2 bg-slate-700/50 border rounded-lg focus:ring-2 outline-none transition text-slate-100 placeholder-slate-500
+                ${errors.email ? 'border-red-500 focus:ring-red-400/50' : 'border-lime-500/30 focus:ring-lime-400/50'}`}
               placeholder="your@email.com"
             />
-            {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
+            {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email.message}</p>}
           </div>
 
           <div>
             <div className="flex justify-between items-center mb-1">
-              <label className="block text-sm font-medium text-gray-700">Пароль</label>
-              <Link to="/forgot-password" className="text-xs text-blue-600 hover:underline">
+              <label className="block text-sm font-medium text-lime-300">Пароль</label>
+              <Link to="/forgot-password" className="text-xs text-cyan-400 hover:text-cyan-300 transition">
                 Забули пароль?
               </Link>
             </div>
             <input
               type="password"
               {...register('password', { required: 'Введіть пароль', minLength: { value: 6, message: 'Мінімум 6 символів' } })}
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition
-                ${errors.password ? 'border-red-500 focus:ring-red-200' : 'border-gray-300'}`}
+              className={`w-full px-4 py-2 bg-slate-700/50 border rounded-lg focus:ring-2 outline-none transition text-slate-100 placeholder-slate-500
+                ${errors.password ? 'border-red-500 focus:ring-red-400/50' : 'border-lime-500/30 focus:ring-lime-400/50'}`}
               placeholder="••••••••"
             />
-            {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password.message}</p>}
+            {errors.password && <p className="text-red-400 text-xs mt-1">{errors.password.message}</p>}
           </div>
 
           <button
             type="submit"
             disabled={isLoading}
-            className={`w-full py-3 text-white font-bold rounded-lg shadow-md transition duration-300
-              ${isLoading ? 'bg-blue-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700 hover:shadow-lg'}`}
+            className="w-full py-3 bg-gradient-to-r from-lime-500 to-lime-400 text-slate-900 font-bold rounded-lg shadow-glow-lime hover:shadow-glow-lime-strong transition disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {isLoading ? 'Вхід...' : 'Увійти'}
+            {isLoading ? 'Завантаження...' : 'Увійти'}
           </button>
         </form>
 
-        <p className="mt-6 text-center text-sm text-gray-600">
-          Ще не маєте акаунту?{' '}
-          <Link to="/register" className="text-blue-600 font-semibold hover:underline">
-            Зареєструватися
-          </Link>
-        </p>
+        <div className="mt-6 text-center">
+          <p className="text-slate-400 text-sm">
+            Немаєте акаунту?{' '}
+            <Link to="/register" className="text-lime-400 hover:text-lime-300 font-medium transition">
+              Зареєструватися
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );
