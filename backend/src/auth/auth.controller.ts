@@ -1,5 +1,6 @@
 import { Controller, Post, Body, UnauthorizedException, Get, UseGuards, Request} from '@nestjs/common';
 import { AuthService } from './auth.service';
+import { UsersService } from 'src/users/users.service';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { JwtAuthGuard } from './jwt-auth.guard';
 import { ForgotPasswordDto } from '../users/dto/forgot-password.dto';
@@ -8,7 +9,10 @@ import { ResetPasswordDto } from '../users/dto/reset-password.dto';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly usersService: UsersService,
+  ) {}
 
   @Post('register')
   register(@Body() createUserDto: CreateUserDto) {
@@ -28,8 +32,11 @@ export class AuthController {
 
   @UseGuards(JwtAuthGuard)
   @Get('profile')
-  getProfile(@Request() req) {
-    return req.user;
+  async getProfile(@Request() req) {
+    const user = await this.usersService.findOne(req.user.userId);
+    const userObj = user.toObject();
+
+    return userObj;
   }
 
   @Post('forgot-password')
